@@ -5,14 +5,8 @@ import { useCart } from '@/hooks/useCart';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-// Fonction pour formater les prix en Ariary
-const formatPrice = (price: number) => {
-  return new Intl.NumberFormat('fr-MG', {
-    style: 'decimal',
-    maximumFractionDigits: 0,
-  }).format(price) + ' Ar';
-};
+import { formatPrice } from '@/utils/formatters';
+import { siteConfig } from '@/config/siteConfig';
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart();
@@ -171,9 +165,9 @@ const CartPage = () => {
             <div className="mt-6 text-sm text-center text-muted-foreground">
               <p>Informations de contact</p>
               <div className="mt-2 text-left space-y-1">
-                <p>Tel: 0348133458</p>
-                <p>Email: rasoanirinamialisoa@gmail.com</p>
-                <p>Adresse: Lot 198 NJO Mahatsinjo Avaradrano</p>
+                <p>Tel: {siteConfig.contact.phone}</p>
+                <p>Email: {siteConfig.contact.email}</p>
+                <p>Adresse: {siteConfig.contact.address}</p>
               </div>
             </div>
           </div>

@@ -6,7 +6,8 @@
  */
 export const formatPrice = (price: number): string => {
   return new Intl.NumberFormat('fr-MG', {
-    style: 'decimal',
+    style: 'currency',
+    currency: 'MGA',
     maximumFractionDigits: 0,
-  }).format(price) + ' Ar';
+  }).format(price);
 };

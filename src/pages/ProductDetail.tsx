@@ -7,9 +7,11 @@ import { Label } from "@/components/ui/label";
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import { useToast } from '@/hooks/use-toast';
+import { formatPrice } from '@/utils/formatters';
+import { siteConfig } from '@/config/siteConfig';
 
 // Fonction pour formater les prix en Ariary
-const formatPrice = (price: number) => {
+const formatPriceOld = (price: number) => {
   return new Intl.NumberFormat('fr-MG', {
     style: 'decimal',
     maximumFractionDigits: 0,
@@ -240,7 +242,7 @@ const ProductDetail = () => {
             <ul className="space-y-2">
               <li className="flex items-center gap-2">
                 <Check size={16} className="text-green-600" />
-                <span>Livraison gratuite pour les commandes supérieures à 200 000 Ar</span>
+                <span>Livraison gratuite pour les commandes supérieures à {formatPrice(siteConfig.shipping.freeShippingThreshold)}</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check size={16} className="text-green-600" />

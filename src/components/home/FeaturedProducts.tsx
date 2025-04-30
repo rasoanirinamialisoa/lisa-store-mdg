@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShoppingBag } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 import { useCart } from '@/hooks/useCart';
+import { formatPrice } from '@/utils/formatters';
 
 const FeaturedProducts = () => {
   const { addToCart } = useCart();
