@@ -1,9 +1,18 @@
 
 import { Link } from 'react-router-dom';
-import { Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
+import { Plus, Minus, Trash2, ShoppingBag, CreditCard } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+// Fonction pour formater les prix en Ariary
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('fr-MG', {
+    style: 'decimal',
+    maximumFractionDigits: 0,
+  }).format(price) + ' Ar';
+};
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, clearCart, getCartTotal } = useCart();
@@ -52,7 +61,7 @@ const CartPage = () => {
                           />
                           <div>
                             <h3 className="font-medium">{item.name}</h3>
-                            <p className="text-sm text-muted-foreground">Prix unitaire: {item.price.toFixed(2)} €</p>
+                            <p className="text-sm text-muted-foreground">Prix unitaire: {formatPrice(item.price)}</p>
                           </div>
                         </div>
                       </td>
@@ -76,7 +85,7 @@ const CartPage = () => {
                         </div>
                       </td>
                       <td className="py-4 text-right font-medium">
-                        {(item.price * item.quantity).toFixed(2)} €
+                        {formatPrice(item.price * item.quantity)}
                       </td>
                       <td className="py-4 text-right">
                         <button
@@ -115,7 +124,7 @@ const CartPage = () => {
             <div className="space-y-3">
               <div className="flex justify-between text-sm">
                 <span>Sous-total</span>
-                <span>{getCartTotal().toFixed(2)} €</span>
+                <span>{formatPrice(getCartTotal())}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span>Frais de livraison</span>
@@ -124,20 +133,47 @@ const CartPage = () => {
               <Separator className="my-4" />
               <div className="flex justify-between font-semibold">
                 <span>Total (TTC)</span>
-                <span>{getCartTotal().toFixed(2)} €</span>
+                <span>{formatPrice(getCartTotal())}</span>
               </div>
             </div>
             
-            <Button className="w-full mt-6 bg-lisa-primary hover:bg-lisa-accent">
-              Procéder au paiement
-            </Button>
+            <Tabs defaultValue="mvola" className="mt-6">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="mvola">MVola</TabsTrigger>
+                <TabsTrigger value="cash">Paiement à la livraison</TabsTrigger>
+              </TabsList>
+              <TabsContent value="mvola" className="mt-4">
+                <div className="bg-orange-100 p-4 rounded-md mb-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <CreditCard className="text-orange-600" size={18} />
+                    <h3 className="font-medium text-orange-800">Payer avec MVola</h3>
+                  </div>
+                  <p className="text-sm text-orange-700">
+                    Vous serez redirigé vers MVola pour finaliser votre paiement de manière sécurisée.
+                  </p>
+                </div>
+                <Button className="w-full bg-orange-500 hover:bg-orange-600">
+                  Payer avec MVola
+                </Button>
+              </TabsContent>
+              <TabsContent value="cash" className="mt-4">
+                <div className="bg-blue-100 p-4 rounded-md mb-4">
+                  <p className="text-sm text-blue-700">
+                    Vous paierez le montant total à la livraison. Veuillez préparer le montant exact.
+                  </p>
+                </div>
+                <Button className="w-full bg-lisa-primary hover:bg-lisa-accent">
+                  Commander
+                </Button>
+              </TabsContent>
+            </Tabs>
             
             <div className="mt-6 text-sm text-center text-muted-foreground">
-              <p>Nous acceptons</p>
-              <div className="flex justify-center gap-2 mt-2">
-                <span className="px-2 py-1 bg-gray-100 rounded">Visa</span>
-                <span className="px-2 py-1 bg-gray-100 rounded">Mastercard</span>
-                <span className="px-2 py-1 bg-gray-100 rounded">PayPal</span>
+              <p>Informations de contact</p>
+              <div className="mt-2 text-left space-y-1">
+                <p>Tel: 0348133458</p>
+                <p>Email: rasoanirinamialisoa@gmail.com</p>
+                <p>Adresse: Lot 198 NJO Mahatsinjo Avaradrano</p>
               </div>
             </div>
           </div>

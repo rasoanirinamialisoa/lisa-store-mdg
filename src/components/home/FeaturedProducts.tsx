@@ -13,7 +13,7 @@ const FeaturedProducts = () => {
       id: 1,
       name: 'Vase Céramique Élégant',
       category: 'decoration',
-      price: 39.99,
+      price: 159960,
       image: 'https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
       isNew: true,
       isSale: false
@@ -22,8 +22,8 @@ const FeaturedProducts = () => {
       id: 2,
       name: 'Sac à Main Tendance',
       category: 'accessories',
-      price: 59.99,
-      originalPrice: 79.99,
+      price: 239960,
+      originalPrice: 319960,
       image: 'https://images.unsplash.com/photo-1598532163257-ae3c6b2524b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1963&q=80',
       isNew: false,
       isSale: true
@@ -32,7 +32,7 @@ const FeaturedProducts = () => {
       id: 3,
       name: 'Housse de Coussin Motif Géométrique',
       category: 'home',
-      price: 24.99,
+      price: 99960,
       image: 'https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
       isNew: true,
       isSale: false
@@ -41,8 +41,8 @@ const FeaturedProducts = () => {
       id: 4,
       name: 'Montre Connectée Moderne',
       category: 'gadgets',
-      price: 89.99,
-      originalPrice: 129.99,
+      price: 359960,
+      originalPrice: 519960,
       image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80',
       isNew: false,
       isSale: true
@@ -51,7 +51,7 @@ const FeaturedProducts = () => {
       id: 5,
       name: 'Robe Bohème Chic',
       category: 'fashion',
-      price: 79.99,
+      price: 319960,
       image: 'https://images.unsplash.com/photo-1618932260643-eee4a2f652a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=780&q=80',
       isNew: true,
       isSale: false
@@ -60,8 +60,8 @@ const FeaturedProducts = () => {
       id: 6,
       name: 'Lampe de Table Artisanale',
       category: 'decoration',
-      price: 69.99,
-      originalPrice: 89.99,
+      price: 279960,
+      originalPrice: 359960,
       image: 'https://images.unsplash.com/photo-1513506212288-9d98a81f3777?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
       isNew: false,
       isSale: true
@@ -70,7 +70,7 @@ const FeaturedProducts = () => {
       id: 7,
       name: 'Set de Bijoux Vintage',
       category: 'accessories',
-      price: 45.99,
+      price: 183960,
       image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
       isNew: true,
       isSale: false
@@ -79,13 +79,21 @@ const FeaturedProducts = () => {
       id: 8,
       name: 'Enceinte Bluetooth Portable',
       category: 'gadgets',
-      price: 49.99,
-      originalPrice: 69.99,
+      price: 199960,
+      originalPrice: 279960,
       image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1936&q=80',
       isNew: false,
       isSale: true
     }
   ];
+
+  // Fonction pour formater les prix en Ariary
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('fr-MG', {
+      style: 'decimal',
+      maximumFractionDigits: 0,
+    }).format(price) + ' Ar';
+  };
 
   return (
     <section className="py-16 bg-lisa-light">
@@ -131,10 +139,10 @@ const FeaturedProducts = () => {
                 </h3>
                 <p className="text-sm text-muted-foreground mb-2">{product.category}</p>
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold">{product.price.toFixed(2)} €</span>
+                  <span className="font-semibold">{formatPrice(product.price)}</span>
                   {product.originalPrice && (
                     <span className="text-sm text-muted-foreground line-through">
-                      {product.originalPrice.toFixed(2)} €
+                      {formatPrice(product.originalPrice)}
                     </span>
                   )}
                 </div>

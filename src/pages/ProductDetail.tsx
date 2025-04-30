@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ShoppingBag, Heart, Share2, ChevronRight, Check } from 'lucide-react';
@@ -8,6 +7,14 @@ import { Label } from "@/components/ui/label";
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import { useToast } from '@/hooks/use-toast';
+
+// Fonction pour formater les prix en Ariary
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('fr-MG', {
+    style: 'decimal',
+    maximumFractionDigits: 0,
+  }).format(price) + ' Ar';
+};
 
 // Sample products data - in a real application this would be fetched from an API
 const products = [
@@ -24,7 +31,7 @@ const products = [
       'Facile à nettoyer'
     ],
     category: 'decoration',
-    price: 39.99,
+    price: 159960,
     colors: ['Blanc', 'Terracotta', 'Bleu'],
     sizes: [],
     stock: 15,
@@ -144,7 +151,7 @@ const ProductDetail = () => {
         {/* Product Info */}
         <div>
           <h1 className="text-3xl md:text-4xl font-semibold mb-3 font-playfair">{product.name}</h1>
-          <p className="text-xl font-medium mb-4 text-lisa-primary">{product.price.toFixed(2)} €</p>
+          <p className="text-xl font-medium mb-4 text-lisa-primary">{formatPrice(product.price)}</p>
           
           <p className="text-muted-foreground mb-6">{product.description}</p>
           
@@ -233,7 +240,7 @@ const ProductDetail = () => {
             <ul className="space-y-2">
               <li className="flex items-center gap-2">
                 <Check size={16} className="text-green-600" />
-                <span>Livraison gratuite pour les commandes supérieures à 50€</span>
+                <span>Livraison gratuite pour les commandes supérieures à 200 000 Ar</span>
               </li>
               <li className="flex items-center gap-2">
                 <Check size={16} className="text-green-600" />
