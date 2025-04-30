@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { ShoppingBag } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
@@ -87,14 +86,6 @@ const FeaturedProducts = () => {
       isSale: true
     }
   ];
-
-  // Fonction pour formater les prix en Ariary
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('fr-MG', {
-      style: 'decimal',
-      maximumFractionDigits: 0,
-    }).format(price) + ' Ar';
-  };
 
   return (
     <section className="py-16 bg-lisa-light">
